@@ -26,7 +26,7 @@ public class PersonDAOImplementation implements PersonDAO
 
   private Connection getConnection() throws SQLException
   {
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=recipedatabase", "postgres", "dupaxyz13");
+    return DriverManager.getConnection("jdbc:postgresql://10.154.204.58:5432/postgres?currentSchema=recipedatabase", "postgres", "dupaxyz13");
   }
 
   @Override public void createMember(Member member) throws SQLException
