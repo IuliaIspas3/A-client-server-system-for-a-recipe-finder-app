@@ -71,6 +71,7 @@ public class DisplayRecipeViewModel implements PropertyChangeListener
   public void bindTitle(StringProperty property)
   {
     this.title.bindBidirectional(property);
+
   }
 
   public void bindAuthor(StringProperty property)
@@ -80,7 +81,7 @@ public class DisplayRecipeViewModel implements PropertyChangeListener
 
   public void bindIngredientsList(ObjectProperty<ObservableList<IngredientAdapter>> property)
   {
-    property.bind(ingredientsList);
+    property.bindBidirectional(ingredientsList);
   }
 
   public void bindMultiplier(StringProperty property)
@@ -110,6 +111,7 @@ public class DisplayRecipeViewModel implements PropertyChangeListener
     this.ingredientsList.clear();
     this.description.set("");
     this.error.set("");
+    this.recipe = null;
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

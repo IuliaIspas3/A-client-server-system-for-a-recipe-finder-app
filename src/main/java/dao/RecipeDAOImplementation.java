@@ -132,6 +132,16 @@ public class RecipeDAOImplementation implements RecipeDAO
       return recipes;
     }
   }
+  private double getRating(Connection connection,int id) throws SQLException{
+    PreparedStatement statement = connection.prepareStatement("SELECT AVG(rate) FROM Rates WHERE recipeId = ?");
+    statement.setInt(1, id);
+    ResultSet resultSet = statement.executeQuery();
+    if (resultSet.next())
+    {
+      return resultSet.getDouble("avg");
+    }
+    return 0;
+  }
 
   @Override public ArrayList<Recipe> readRecipesByUsername(String username)
       throws SQLException
@@ -151,6 +161,7 @@ public class RecipeDAOImplementation implements RecipeDAO
         Recipe recipe = new Recipe(title, description, username);
         recipe.setId(id);
         recipe.setAllIngredients(getRecipeIngredients(connection, id));
+        recipe.setAvrRating(getRating(connection, id));
         recipes.add(recipe);
       }
       return recipes;
@@ -175,6 +186,7 @@ public class RecipeDAOImplementation implements RecipeDAO
         Recipe recipe = new Recipe(title, description, username);
         recipe.setId(id);
         recipe.setAllIngredients(getRecipeIngredients(connection, id));
+        recipe.setAvrRating(getRating(connection, id));
         recipes.add(recipe);
       }
       return recipes;

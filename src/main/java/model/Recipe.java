@@ -1,17 +1,19 @@
 package model;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
-public class Recipe implements Serializable
+public class Recipe implements Serializable, Cloneable
 {
   private int id;
   private String title;
   private String description;
   private final ArrayList<Ingredient> ingredients;
   private final String username;
-  private int sum;
-  private int numberOfRatings;
+  private double avrRating;
+  private NumberFormat formatter;
 
   public Recipe(String title, String description, String username)
   {
@@ -20,8 +22,8 @@ public class Recipe implements Serializable
     this.description = description;
     this.ingredients = new ArrayList<>();
     this.username = username;
-    this.sum = 0;
-    this.numberOfRatings = 0;
+    this.avrRating = 0;
+    this.formatter = new DecimalFormat("#0.00");
   }
 
   public void setId(int id)
@@ -43,6 +45,9 @@ public class Recipe implements Serializable
   {
     this.ingredients.clear();
     this.ingredients.addAll(ingredients);
+  }
+  public void setAvrRating(double rating){
+    this.avrRating = Double.valueOf(formatter.format(rating));
   }
 
   public int getId()
@@ -82,7 +87,7 @@ public class Recipe implements Serializable
 
   public String toString()
   {
-    return title;
+    return title + " [rating: "+avrRating+"]";
   }
 
   public boolean equals(Object obj)
@@ -106,13 +111,8 @@ public class Recipe implements Serializable
     return this.title.equals(other.title) && this.description.equals(other.description) && this.username.equals(other.username);
   }
 
-  public String toString1()
+  @Override public Object clone() throws CloneNotSupportedException
   {
-    String temp = title + "\n" + description + "\n" + username + "\ningredients:";
-    for (int i = 0; i < ingredients.size(); i++)
-    {
-      temp += "\n" + ingredients.get(i);
-    }
-    return temp;
+    return super.clone();
   }
 }

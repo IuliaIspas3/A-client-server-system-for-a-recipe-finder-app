@@ -32,6 +32,12 @@ public class IngredientAdapter implements IngredientInterface
     return subject.getAmount();
   }
 
+  public void setAmount(double amount)
+  {
+    subject.setAmount(amount);
+    this.amount = amount;
+  }
+
   @Override public String getAmountType()
   {
     return subject.getAmountType();

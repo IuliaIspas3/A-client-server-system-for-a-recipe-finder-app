@@ -1,10 +1,10 @@
 package view.member;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 import model.IngredientAdapter;
 import view.ViewController;
@@ -24,6 +24,9 @@ public class DisplayFavouriteRecipeMemberViewController implements ViewControlle
   @FXML private TableColumn<IngredientAdapter, String> ingredientAmountType;
   @FXML private TextArea description;
   @FXML private Label error;
+  @FXML private TextField multiplier;
+  @FXML private ComboBox<String> ratings;
+  private ReadOnlyObjectProperty<String> rate;
 
   private ViewHandler viewHandler;
   private MenuHandler menuHandler;
@@ -36,7 +39,8 @@ public class DisplayFavouriteRecipeMemberViewController implements ViewControlle
     this.menuHandler = MemberMenuHandler.getInstance(viewHandler);
     this.viewModel = displayRecipeViewModel;
     this.root = root;
-
+    this.ratings.getItems().setAll("1", "2", "3", "4", "5");
+    this.rate = ratings.getSelectionModel().selectedItemProperty();
     this.viewModel.bindTitle(title.textProperty());
     this.viewModel.bindAuthor(author.textProperty());
     this.viewModel.bindIngredientsList(ingredientTableView.itemsProperty());
@@ -44,7 +48,9 @@ public class DisplayFavouriteRecipeMemberViewController implements ViewControlle
     this.ingredientAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
     this.ingredientAmountType.setCellValueFactory(new PropertyValueFactory<>("amountType"));
     this.viewModel.bindDescription(description.textProperty());
+    this.viewModel.bindRate(rate);
     this.viewModel.bindError(error.textProperty());
+    this.viewModel.bindMultiplier(multiplier.textProperty());
   }
 
   @FXML protected void handleMenu(Event event)
@@ -59,6 +65,15 @@ public class DisplayFavouriteRecipeMemberViewController implements ViewControlle
   {
     reset();
     viewHandler.openView(ViewFactory.SEARCHFAVOURITESMEMBER);
+  }
+  @FXML protected void multiplyIngredients()
+  {
+    this.viewModel.multiplyIngredients();
+  }
+
+  @FXML protected void rateButtonClicked()
+  {
+    this.viewModel.rate();
   }
 
   @Override public void reset()

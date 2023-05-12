@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import java.text.*;
 
-public class Ingredient implements Serializable, IngredientInterface
+public class Ingredient implements Serializable, IngredientInterface, Cloneable
 {
   private final String name;
   private double amount;
@@ -64,5 +64,10 @@ public class Ingredient implements Serializable, IngredientInterface
 
     Ingredient other = (Ingredient) obj;
     return this.name.equals(other.name);
+  }
+
+  @Override public Object clone() throws CloneNotSupportedException
+  {
+    return super.clone();
   }
 }
