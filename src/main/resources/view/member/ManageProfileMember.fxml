@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.member.ManageProfileMemberViewController">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="1000.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Home">
+               <items>
+                  <MenuItem fx:id="SEARCHMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="Search" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Profile">
+               <items>
+                  <MenuItem fx:id="MANAGEPROFILEMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="Edit profile" />
+                  <MenuItem fx:id="MANAGERECIPESMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="My recipes" />
+                  <MenuItem fx:id="SEARCHFAVOURITESMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="My favourites" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleMenu" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Label layoutX="64.0" layoutY="70.0" text="Edit Account Information :">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="64.0" layoutY="130.0" text="Username :">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="64.0" layoutY="180.0" text="New Email:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="64.0" layoutY="230.0" text="New Password:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="username" editable="false" layoutX="188.0" layoutY="130.0" />
+      <TextField fx:id="email" layoutX="188.0" layoutY="180.0" />
+      <TextField fx:id="password" layoutX="188.0" layoutY="230.0" />
+      <Label fx:id="error" layoutX="64.0" layoutY="288.0" textFill="#f70505">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="359.0" layoutY="179.0" mnemonicParsing="false" onAction="#editEmailButtonClicked" prefHeight="14.0" prefWidth="106.0" text="Edit Email">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <Button layoutX="856.0" layoutY="649.0" mnemonicParsing="false" onAction="#deleteProfileButtonClicked" text="Delete Account">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="359.0" layoutY="229.0" mnemonicParsing="false" onAction="#editPasswordButtonClicked" prefHeight="27.0" prefWidth="106.0" text="Edit Password">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

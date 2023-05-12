@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.member.SearchRecipesMemberViewController">
+   <children>
+      <ListView fx:id="recipeListView" layoutX="14.0" layoutY="81.0" onMouseClicked="#displayRecipeListener" prefHeight="600.0" prefWidth="680.0" />
+      <TextField fx:id="searchRecipeTextField" layoutX="14.0" layoutY="42.0" onKeyTyped="#recipeChangeListener" prefHeight="25.0" prefWidth="683.0" promptText="Type the title..." />
+      <MenuBar prefHeight="25.0" prefWidth="1000.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Home">
+            <items>
+              <MenuItem fx:id="SEARCHMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="Search" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Profile">
+            <items>
+                  <MenuItem fx:id="MANAGEPROFILEMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="Edit profile" />
+                  <MenuItem fx:id="MANAGERECIPESMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="My recipes" />
+              <MenuItem fx:id="SEARCHFAVOURITESMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="My favourites" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleMenu" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TextField fx:id="searchIngredientTextField" layoutX="713.0" layoutY="42.0" onKeyTyped="#ingredientChangeListener" prefHeight="26.0" prefWidth="270.0" promptText="Type the ingredient..." />
+      <TableView fx:id="ingredientTable" layoutX="713.0" layoutY="79.0" prefHeight="560.0" prefWidth="270.0">
+        <columns>
+          <TableColumn fx:id="nameCell" prefWidth="229.0" text="Name of ingredient" />
+          <TableColumn fx:id="selectCell" minWidth="0.5" prefWidth="44.5" />
+        </columns>
+      </TableView>
+      <Button layoutX="883.0" layoutY="650.0" mnemonicParsing="false" onAction="#selectButtonPressed" prefHeight="30.0" prefWidth="100.0" text="Select" />
+   </children>
+</AnchorPane>

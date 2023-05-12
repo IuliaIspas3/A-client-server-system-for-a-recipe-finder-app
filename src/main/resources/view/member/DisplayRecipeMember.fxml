@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.member.DisplayRecipeMemberViewController">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="1000.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Home">
+               <items>
+                  <MenuItem fx:id="SEARCHMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="Search" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Profile">
+               <items>
+                  <MenuItem fx:id="MANAGEPROFILEMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="Edit profile" />
+                  <MenuItem fx:id="MANAGERECIPESMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="My recipes" />
+                  <MenuItem fx:id="SEARCHFAVOURITESMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="My favourites" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleMenu" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Label fx:id="title" layoutX="18.0" layoutY="43.0" prefHeight="46.0" prefWidth="965.0" wrapText="true">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="127.0" text="Ingredients :">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="author" layoutX="18.0" layoutY="89.0" prefHeight="26.0" prefWidth="346.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="400.0" layoutY="127.0" text="Description :">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="description" editable="false" focusTraversable="false" layoutX="400.0" layoutY="163.0" prefHeight="479.0" prefWidth="578.0" />
+      <Button layoutX="774.0" layoutY="654.0" mnemonicParsing="false" onAction="#addToFavourites" prefHeight="30.0" prefWidth="129.0" text="Add to Favourites" />
+      <Button layoutX="915.0" layoutY="654.0" mnemonicParsing="false" onAction="#goBackButtonPressed" prefHeight="30.0" prefWidth="62.0" text="Back" />
+      <Label fx:id="error" layoutX="400.0" layoutY="660.0" textFill="RED" />
+      <ComboBox fx:id="ratings" layoutX="400.0" layoutY="656.0" prefWidth="150.0" promptText="Choose Rating" />
+      <Button layoutX="559.0" layoutY="656.0" mnemonicParsing="false" onAction="#rateButtonClicked" text="Rate" />
+      <TableView fx:id="ingredientTableView" layoutX="18.0" layoutY="163.0" prefHeight="479.0" prefWidth="357.0">
+        <columns>
+          <TableColumn fx:id="ingredientName" prefWidth="158.3999900817871" text="Ingredient Name" />
+          <TableColumn fx:id="ingredientAmount" prefWidth="64.0" text="Amount" />
+            <TableColumn fx:id="ingredientAmountType" prefWidth="134.3999786376953" text="Unit of Measerument" />
+        </columns>
+      </TableView>
+      <Button layoutX="159.0" layoutY="656.0" mnemonicParsing="false" onAction="#multiplyIngredients" text="Calculate" />
+      <TextField fx:id="multiplier" layoutX="18.0" layoutY="656.0" prefHeight="26.0" prefWidth="137.0" promptText="Multiply Measurement" />
+   </children>
+</AnchorPane>

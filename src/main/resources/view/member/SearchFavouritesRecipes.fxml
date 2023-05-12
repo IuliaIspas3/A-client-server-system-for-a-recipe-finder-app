@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.member.SearchFavouriteRecipesMemberViewController">
+   <children>
+      <ListView fx:id="recipeListView" layoutX="14.0" layoutY="81.0" onMouseClicked="#displayRecipeListener" prefHeight="600.0" prefWidth="970.0" />
+      <TextField fx:id="searchRecipeTextField" layoutX="14.0" layoutY="42.0" onKeyTyped="#recipeChangeListener" prefHeight="26.0" prefWidth="969.0" promptText="Type the title..." />
+      <MenuBar prefHeight="25.0" prefWidth="1000.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Home">
+               <items>
+                  <MenuItem fx:id="SEARCHMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="Search" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Profile">
+               <items>
+                  <MenuItem fx:id="MANAGEPROFILEMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="Edit profile" />
+                  <MenuItem fx:id="MANAGERECIPESMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="My recipes" />
+                  <MenuItem fx:id="SEARCHFAVOURITESMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="My favourites" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleMenu" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>

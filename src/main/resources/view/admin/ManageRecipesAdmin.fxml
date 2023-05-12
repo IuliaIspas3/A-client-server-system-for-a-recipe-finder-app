@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.admin.ManageRecipesAdminViewController">
+   <children>
+      <ListView fx:id="recipeListView" layoutX="14.0" layoutY="81.0" onMouseClicked="#selectRecipeListener" prefHeight="564.0" prefWidth="400.0" />
+      <TextField fx:id="searchRecipeTextField" layoutX="14.0" layoutY="42.0" onKeyTyped="#recipeChangeListener" prefHeight="25.0" prefWidth="400.0" promptText="Type the title..." />
+      <MenuBar prefHeight="25.0" prefWidth="1000.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Home">
+               <items>
+                  <MenuItem fx:id="SEARCHADMIN" mnemonicParsing="false" onAction="#handleMenu" text="Search" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Managment">
+               <items>
+                  <MenuItem fx:id="MANAGEPROFILESADMIN" mnemonicParsing="false" onAction="#handleMenu" text="Manage Profiles" />
+                  <MenuItem fx:id="MANAGERECIPESADMIN" mnemonicParsing="false" onAction="#handleMenu" text="ManageRecepies" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleMenu" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <TextField fx:id="titleTextField" layoutX="425.0" layoutY="41.0" prefHeight="26.0" prefWidth="560.0" promptText="Title" />
+      <TextArea fx:id="descriptionTextArea" layoutX="425.0" layoutY="399.0" prefHeight="246.0" prefWidth="560.0" promptText="Description" />
+      <Button layoutX="905.0" layoutY="365.0" mnemonicParsing="false" onAction="#addIngredientButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Add" />
+      <Button layoutX="905.0" layoutY="654.0" mnemonicParsing="false" onAction="#addRecipeButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Add" />
+      <Button layoutX="814.0" layoutY="654.0" mnemonicParsing="false" onAction="#editRecipeButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Edit" />
+      <Button layoutX="723.0" layoutY="654.0" mnemonicParsing="false" onAction="#removeRecipeButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Remove" />
+      <Label fx:id="error" layoutX="14.0" layoutY="654.0" prefHeight="26.0" prefWidth="613.0" textFill="#cf0e0e" />
+      <Button layoutX="814.0" layoutY="365.0" mnemonicParsing="false" onAction="#removeIngredientButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Remove" />
+      <Button layoutX="633.0" layoutY="654.0" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="80.0" text="Reset" />
+      <TextField fx:id="authorTextField" editable="false" layoutX="425.0" layoutY="81.0" prefHeight="26.0" prefWidth="560.0" promptText="Author" />
+      <TextField fx:id="ingredientTextField" layoutX="424.0" layoutY="121.0" prefHeight="26.0" prefWidth="246.0" promptText="Ingredient Name" />
+      <TextField fx:id="amountTextField" layoutX="678.0" layoutY="121.0" promptText="Amount" />
+      <TextField fx:id="typeTextField" layoutX="835.0" layoutY="121.0" promptText="Unit of Mesurement" />
+      <TableView fx:id="ingredientTableView" layoutX="424.0" layoutY="155.0" prefHeight="200.0" prefWidth="560.0">
+         <columns>
+            <TableColumn fx:id="ingredientName" prefWidth="249.59994506835938" text="Ingredient Name" />
+            <TableColumn fx:id="ingredientAmount" minWidth="0.0" prefWidth="157.60003662109375" text="Amount" />
+            <TableColumn fx:id="ingredientAmountType" prefWidth="152.7999267578125" text="Unit of Mesurement" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
