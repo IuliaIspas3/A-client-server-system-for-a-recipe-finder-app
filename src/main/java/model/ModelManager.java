@@ -275,7 +275,14 @@ public class ModelManager implements Model, PropertyChangeListener
 
   @Override public void deleteProfile(String username)
   {
-    this.client.deleteProfile(username);
+    try
+    {
+      this.client.deleteProfile(username);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override public void addPropertyChangeListener(
