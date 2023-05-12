@@ -18,7 +18,10 @@ import viewmodel.DisplayFavouriteRecipeViewModel;
 public class DisplayFavouriteRecipeMemberViewController implements ViewController {
   @FXML private Label title;
   @FXML private Label author;
-  @FXML private ListView<IngredientAdapter> ingredientListView;
+  @FXML private TableView<IngredientAdapter> ingredientTableView;
+  @FXML private TableColumn<IngredientAdapter, String> ingredientName;
+  @FXML private TableColumn<IngredientAdapter, String> ingredientAmount;
+  @FXML private TableColumn<IngredientAdapter, String> ingredientAmountType;
   @FXML private TextArea description;
   @FXML private Label error;
 
@@ -36,7 +39,10 @@ public class DisplayFavouriteRecipeMemberViewController implements ViewControlle
 
     this.viewModel.bindTitle(title.textProperty());
     this.viewModel.bindAuthor(author.textProperty());
-    this.viewModel.bindIngredientsList(ingredientListView.itemsProperty());
+    this.viewModel.bindIngredientsList(ingredientTableView.itemsProperty());
+    this.ingredientName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    this.ingredientAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+    this.ingredientAmountType.setCellValueFactory(new PropertyValueFactory<>("amountType"));
     this.viewModel.bindDescription(description.textProperty());
     this.viewModel.bindError(error.textProperty());
   }

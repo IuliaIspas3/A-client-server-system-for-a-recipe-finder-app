@@ -30,10 +30,13 @@ public class SearchRecipesViewModel implements PropertyChangeListener
   public SearchRecipesViewModel(Model model)
   {
     this.model = model;
-    this.recipesList = new SimpleListProperty<>(FXCollections.observableArrayList());
+    this.recipesList = new SimpleListProperty<>(
+        FXCollections.observableArrayList());
     this.recipe = new SimpleObjectProperty<>();
-    this.ingredientList = new SimpleListProperty<>(FXCollections.observableArrayList());
-    this.selectedIngredientList = new SimpleListProperty<>(FXCollections.observableArrayList());
+    this.ingredientList = new SimpleListProperty<>(
+        FXCollections.observableArrayList());
+    this.selectedIngredientList = new SimpleListProperty<>(
+        FXCollections.observableArrayList());
     this.error = new SimpleStringProperty("");
     this.title = new SimpleStringProperty("");
     this.description = new SimpleStringProperty("");
@@ -87,13 +90,15 @@ public class SearchRecipesViewModel implements PropertyChangeListener
     resetRecipesList();
   }
 
-  public void bindIngredientList(ObjectProperty<ObservableList<IngredientAdapter>> property)
+  public void bindIngredientList(
+      ObjectProperty<ObservableList<IngredientAdapter>> property)
   {
     property.bind(ingredientList);
     resetIngredientList();
   }
 
-  public void bindSelectedIngredientList(SimpleListProperty<IngredientAdapter> property)
+  public void bindSelectedIngredientList(
+      SimpleListProperty<IngredientAdapter> property)
   {
     this.selectedIngredientList.bind(property);
   }
@@ -158,12 +163,13 @@ public class SearchRecipesViewModel implements PropertyChangeListener
         resetRecipesList();
         resetIngredientList();
       }
-      else if(evt.getPropertyName().equals("YourAccountRemoved"))
+      else if (evt.getPropertyName().equals("YourAccountRemoved"))
       {
         this.support.firePropertyChange("YourAccountRemoved", false, true);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
-        alert.setContentText("Your account has been removed by the administrator.");
+        alert.setContentText(
+            "Your account has been removed by the administrator.");
         alert.show();
       }
     });

@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.Ingredient;
 import model.IngredientAdapter;
 import model.Model;
 import model.Recipe;
@@ -29,8 +30,7 @@ public class DisplayRecipeViewModel implements PropertyChangeListener
     this.recipe = null;
     this.title = new SimpleStringProperty("");
     this.author = new SimpleStringProperty("");
-    this.ingredientsList = new SimpleListProperty<>(
-        FXCollections.observableArrayList());
+    this.ingredientsList = new SimpleListProperty<>(FXCollections.observableArrayList());
     this.multiplier = new SimpleStringProperty("");
     this.description = new SimpleStringProperty("");
     this.rate = new SimpleStringProperty("");
@@ -53,11 +53,11 @@ public class DisplayRecipeViewModel implements PropertyChangeListener
     {
       if (multiplier.get() != null)
       {
-        ingredientsList.clear();
         for (int i = 0; i < recipe.getIngredients().size(); i++)
         {
-          recipe.getIngredients().get(i).setAmount(recipe.getIngredients().get(i).getAmount() * Double.valueOf(multiplier.get()));
-          ingredientsList.add(new IngredientAdapter(recipe.getIngredients().get(i)));
+          IngredientAdapter ingredientAdapter = ingredientsList.get().get(i);
+          ingredientAdapter.setAmount(ingredientAdapter.getAmount()*Double.valueOf(multiplier.get()));
+          ingredientsList.set(i, ingredientAdapter);
         }
       }
     }
@@ -78,8 +78,7 @@ public class DisplayRecipeViewModel implements PropertyChangeListener
     this.author.bindBidirectional(property);
   }
 
-  public void bindIngredientsList(
-      ObjectProperty<ObservableList<IngredientAdapter>> property)
+  public void bindIngredientsList(ObjectProperty<ObservableList<IngredientAdapter>> property)
   {
     property.bind(ingredientsList);
   }
@@ -123,8 +122,14 @@ public class DisplayRecipeViewModel implements PropertyChangeListener
         this.author.set(recipe.getUsername());
         for (int i = 0; i < recipe.getIngredients().size(); i++)
         {
-          ingredientsList.add(
-              new IngredientAdapter(recipe.getIngredients().get(i)));
+          try
+          {
+            ingredientsList.add(new IngredientAdapter((Ingredient) recipe.getIngredients().get(i).clone()));
+          }
+          catch (CloneNotSupportedException e)
+          {
+            throw new RuntimeException(e);
+          }
         }
         this.description.set(recipe.getDescription());
         this.error.set("");

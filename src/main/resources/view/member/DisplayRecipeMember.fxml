@@ -59,7 +59,7 @@
       <TextArea fx:id="description" editable="false" focusTraversable="false" layoutX="400.0" layoutY="163.0" prefHeight="479.0" prefWidth="578.0" />
       <Button layoutX="774.0" layoutY="654.0" mnemonicParsing="false" onAction="#addToFavourites" prefHeight="30.0" prefWidth="129.0" text="Add to Favourites" />
       <Button layoutX="915.0" layoutY="654.0" mnemonicParsing="false" onAction="#goBackButtonPressed" prefHeight="30.0" prefWidth="62.0" text="Back" />
-      <Label fx:id="error" layoutX="400.0" layoutY="660.0" textFill="RED" />
+      <Label fx:id="error" layoutX="240.0" layoutY="660.0" textFill="RED" />
       <ComboBox fx:id="ratings" layoutX="400.0" layoutY="656.0" prefWidth="150.0" promptText="Choose Rating" />
       <Button layoutX="559.0" layoutY="656.0" mnemonicParsing="false" onAction="#rateButtonClicked" text="Rate" />
       <TableView fx:id="ingredientTableView" layoutX="18.0" layoutY="163.0" prefHeight="479.0" prefWidth="357.0">

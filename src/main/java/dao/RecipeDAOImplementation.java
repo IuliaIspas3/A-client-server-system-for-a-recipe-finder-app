@@ -126,6 +126,7 @@ public class RecipeDAOImplementation implements RecipeDAO
         Recipe recipe = new Recipe(title, description, username);
         recipe.setId(id);
         recipe.setAllIngredients(getRecipeIngredients(connection, id));
+        recipe.setAvrRating(getRating(connection, id));
         recipes.add(recipe);
       }
       return recipes;

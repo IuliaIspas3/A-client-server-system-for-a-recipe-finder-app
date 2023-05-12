@@ -33,7 +33,7 @@
       </Label>
       <TextArea fx:id="description" editable="false" focusTraversable="false" layoutX="399.0" layoutY="134.0" prefHeight="479.0" prefWidth="578.0" />
       <Button layoutX="914.0" layoutY="625.0" mnemonicParsing="false" onAction="#goBackButtonPressed" prefHeight="30.0" prefWidth="62.0" text="Back" />
-      <Label fx:id="error" layoutX="400.0" layoutY="660.0" textFill="RED" />
+      <Label fx:id="error" layoutX="400.0" layoutY="630.0" prefHeight="18.0" prefWidth="0.0" textFill="RED" />
       <TableView fx:id="ingredientTableView" layoutX="17.0" layoutY="134.0" prefHeight="479.0" prefWidth="357.0">
          <columns>
             <TableColumn fx:id="ingredientName" prefWidth="158.3999900817871" text="Ingredient Name" />

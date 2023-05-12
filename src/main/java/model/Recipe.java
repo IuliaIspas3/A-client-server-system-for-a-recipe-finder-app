@@ -65,11 +65,6 @@ public class Recipe implements Serializable
     return ingredients;
   }
 
-  public void addIngredient(Ingredient ingredient)
-  {
-    this.ingredients.add(ingredient);
-  }
-
   public void addAllIngredients(ArrayList<Ingredient> ingredients)
   {
     this.ingredients.addAll(ingredients);
@@ -78,28 +73,6 @@ public class Recipe implements Serializable
   public String getUsername()
   {
     return username;
-  }
-
-  public void removeIngredient(Ingredient ingredient)
-  {
-    for (int i = 0; i < ingredients.size(); i++)
-    {
-      if (ingredients.get(i).equals(ingredient))
-      {
-        ingredients.remove(ingredients.get(i));
-      }
-    }
-  }
-
-  public void addRating(int rate)
-  {
-    this.sum += rate;
-    this.numberOfRatings++;
-  }
-
-  public double getRating()
-  {
-    return (double) this.sum / this.numberOfRatings;
   }
 
   public boolean ifRecipeContainsIngredients(ArrayList<Ingredient> ingredientsList)

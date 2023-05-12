@@ -30,14 +30,12 @@ public class Ingredient implements Serializable, IngredientInterface
     this.amountType = amountType;
   }
 
-  @Override
-  public double getAmount()
+  @Override public double getAmount()
   {
     return amount;
   }
 
-  @Override
-  public String getAmountType()
+  @Override public String getAmountType()
   {
     return amountType;
   }
