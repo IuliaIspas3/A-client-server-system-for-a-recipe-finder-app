@@ -6,6 +6,7 @@ public class Administrator extends Person implements Serializable
 {
   public static final String USERNAME = "Administrator";
   private static Administrator instance;
+  private static final long SerialVersionUID = 1505;
 
   private Administrator(String email, String password)
   {

@@ -8,6 +8,7 @@ public abstract class Person implements Serializable
   private final String email;
   private String username;
   private String password;
+  private static final long SerialVersionUID = 1502;
 
   public Person(String email, String username, String password)
   {

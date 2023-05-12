@@ -28,7 +28,7 @@ public class RecipeDAOImplementation implements RecipeDAO
   private Connection getConnection() throws SQLException
   {
     return DriverManager.getConnection(
-        "jdbc:postgresql://10.154.204.58:5432/postgres?currentSchema=recipedatabase",
+        "jdbc:postgresql://localhost:5432/postgres?currentSchema=recipedatabase",
         "postgres", "dupaxyz13");
   }
 

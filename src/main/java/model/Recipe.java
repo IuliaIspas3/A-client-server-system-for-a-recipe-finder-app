@@ -14,6 +14,7 @@ public class Recipe implements Serializable, Cloneable
   private final String username;
   private double avrRating;
   private NumberFormat formatter;
+  private static final long SerialVersionUID = 1501;
 
   public Recipe(String title, String description, String username)
   {

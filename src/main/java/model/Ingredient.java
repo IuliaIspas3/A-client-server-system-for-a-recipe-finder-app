@@ -10,6 +10,7 @@ public class Ingredient implements Serializable, IngredientInterface, Cloneable
   private String amountType;
   private final boolean select;
   private NumberFormat formatter;
+  private static final long SerialVersionUID = 1504;
 
   public Ingredient(String name)
   {
