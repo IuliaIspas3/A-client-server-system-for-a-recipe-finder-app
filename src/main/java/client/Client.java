@@ -7,6 +7,7 @@ import model.Administrator;
 import model.Ingredient;
 import model.Person;
 import model.Recipe;
+import server.RemoteConnector;
 import shared.Connector;
 
 import java.beans.PropertyChangeListener;
@@ -32,11 +33,16 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
   {
     try
     {
+      this.connector.requestWrite();
       this.username = connector.createAccount(email, username, password);
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException(e);
+    }
+    finally
+    {
+      this.connector.requestWrite();
     }
   }
 
@@ -44,12 +50,17 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
   {
     try
     {
+      this.connector.requestRead();
       this.username = connector.login(username, password);
       return username;
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException(e);
+    }
+    finally
+    {
+      this.connector.releaseRead();
     }
   }
 
@@ -62,11 +73,16 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
   {
     try
     {
+      this.connector.requestWrite();
       this.connector.addRecipe(title, description, ingredients, username);
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException(e);
+    }
+    finally
+    {
+      this.connector.releaseWrite();
     }
   }
 
@@ -74,11 +90,16 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
   {
     try
     {
+      this.connector.requestWrite();
       this.connector.editRecipe(recipe, title, description, ingredients, username);
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException(e);
+    }
+    finally
+    {
+      this.connector.releaseWrite();
     }
   }
 
@@ -86,11 +107,16 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
   {
     try
     {
+      this.connector.requestWrite();
       this.connector.removeRecipe(recipe, username);
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException(e);
+    }
+    finally
+    {
+      this.connector.releaseWrite();
     }
   }
 
@@ -98,11 +124,16 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
   {
     try
     {
+      this.connector.requestWrite();
       this.connector.addToFavourites(recipe, username);
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException(e);
+    }
+    finally
+    {
+      this.connector.releaseWrite();
     }
   }
 
@@ -110,83 +141,168 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
   {
     try
     {
+      this.connector.requestWrite();
       this.connector.removeFromFavourites(recipe, username);
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException(e);
     }
+    finally
+    {
+      this.connector.releaseWrite();
+    }
   }
 
-  public void editPassword(String username, String password)
+  public void editPassword(String username, String password) throws RemoteException
   {
     try
     {
+      this.connector.requestWrite();
       this.connector.editPassword(username, password);
     }
     catch (RemoteException e)
     {
       throw new RuntimeException(e);
     }
+    finally
+    {
+      this.connector.releaseWrite();
+    }
   }
 
-  public void editEmail(String username, String email)
+  public void editEmail(String username, String email) throws RemoteException
   {
     try
     {
+      this.connector.requestWrite();
       this.connector.editEmail(username, email);
     }
     catch (RemoteException e)
     {
       throw new RuntimeException(e);
     }
+    finally
+    {
+      this.connector.releaseWrite();
+    }
   }
 
-  public void deleteProfile(String username)
+  public void deleteProfile(String username) throws RemoteException
   {
     try
     {
+      this.connector.requestWrite();
       this.connector.deleteProfile(username);
     }
     catch (RemoteException e)
     {
       throw new RuntimeException(e);
     }
+    finally
+    {
+      this.connector.releaseWrite();
+    }
   }
 
   public ArrayList<Recipe> getAllRecipes() throws RemoteException
   {
-    return this.connector.getAllRecipes();
+    try
+    {
+      this.connector.requestRead();
+      return this.connector.getAllRecipes();
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+    finally
+    {
+      this.connector.releaseRead();
+    }
   }
 
   public ArrayList<Recipe> getRecipesByUsername() throws RemoteException
   {
-    return this.connector.getRecipesByUsername(username);
+    try
+    {
+      this.connector.requestRead();
+      return this.connector.getRecipesByUsername(username);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+    finally
+    {
+      this.connector.releaseRead();
+    }
   }
 
   public ArrayList<Recipe> getFavouriteRecipes() throws RemoteException
   {
-    return this.connector.getFavouriteRecipes(username);
+    try
+    {
+      this.connector.requestRead();
+      return this.connector.getFavouriteRecipes(username);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+    finally
+    {
+      this.connector.releaseRead();
+    }
   }
 
   public ArrayList<Person> getAllMembers() throws RemoteException
   {
-    return this.connector.getAllMembers();
+    try
+    {
+      this.connector.requestRead();
+      return this.connector.getAllMembers();
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+    finally
+    {
+      this.connector.releaseRead();
+    }
   }
 
   public ArrayList<Ingredient> getAllIngredients() throws RemoteException
   {
-    return this.connector.getAllIngredients();
+    try
+    {
+      this.connector.requestRead();
+      return this.connector.getAllIngredients();
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+    finally
+    {
+      this.connector.releaseRead();
+    }
   }
 
   public void rateRecipe(int rate, Recipe recipe) throws RemoteException{
     try
     {
+      this.connector.requestWrite();
       this.connector.rateRecipe(rate,recipe, username);
     }
     catch (Exception e)
     {
       throw new RemoteException();
+    }
+    finally
+    {
+      this.connector.releaseWrite();
     }
   }
 

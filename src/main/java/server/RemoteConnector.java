@@ -19,9 +19,17 @@ public class RemoteConnector implements Connector
   private RecipeDAO recipeDAO;
   private IngredientDAO ingredientDAO;
   private final RemotePropertyChangeSupport support;
+  private int readers;
+  private int writers;
+  private int current;
+  private int next;
 
   public RemoteConnector()
   {
+    this.readers = 0;
+    this.writers = 0;
+    this.current = 0;
+    this.next = 0;
     try
     {
       this.personDAO = PersonDAOImplementation.getInstance();
@@ -33,6 +41,78 @@ public class RemoteConnector implements Connector
       throw new RuntimeException(e);
     }
     this.support = new RemotePropertyChangeSupport();
+  }
+
+  @Override public synchronized void requestRead()
+  {
+    int myNumber = next++;
+    while (myNumber != current)
+    {
+      try
+      {
+        wait();
+      }
+      catch (InterruptedException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    current++;
+    while (writers > 0)
+    {
+      try
+      {
+        wait();
+      }
+      catch (InterruptedException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    readers++;
+  }
+
+  @Override public synchronized void releaseRead()
+  {
+    readers--;
+    if (readers == 0)
+      notifyAll();
+  }
+
+  @Override public synchronized void requestWrite()
+  {
+    int myNumber = next++;
+    while (myNumber != current)
+    {
+      try
+      {
+        wait();
+      }
+      catch (InterruptedException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    current++;
+    while (writers > 0 || readers > 0)
+    {
+      try
+      {
+        wait();
+      }
+      catch (InterruptedException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    writers++;
+  }
+
+  @Override public synchronized void releaseWrite()
+  {
+    writers--;
+    if (writers == 0)
+      notifyAll();
   }
 
   @Override public synchronized String createAccount(String email,
