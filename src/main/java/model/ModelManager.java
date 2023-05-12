@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class ModelManager implements Model, PropertyChangeListener
 {
   private final Client client;
-  //private final Administrator administrator;
   private ArrayList<Recipe> recipes;
   private ArrayList<Recipe> personRecipes;
   private ArrayList<Recipe> favouriteRecipes;
@@ -27,7 +26,6 @@ public class ModelManager implements Model, PropertyChangeListener
   public ModelManager(Connector connector) throws RemoteException
   {
     this.client = new Client(connector);
-    //this.administrator = Administrator.getInstance();
     this.recipes = new ArrayList<>();
     this.personRecipes = new ArrayList<>();
     this.favouriteRecipes = new ArrayList<>();

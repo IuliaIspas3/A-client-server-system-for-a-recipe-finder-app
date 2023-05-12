@@ -220,8 +220,7 @@ public class Client extends UnicastRemoteObject
       else if (event.getPropertyName().equals("AccountRemoved"))
       {
         if (event.getNewValue().equals(username))
-          this.support.firePropertyChange("YourAccountRemoved", null,
-              event.getNewValue());
+          this.support.firePropertyChange("YourAccountRemoved", null, event.getNewValue());
         this.support.firePropertyChange("AccountRemoved", null,
             event.getNewValue());
       }
