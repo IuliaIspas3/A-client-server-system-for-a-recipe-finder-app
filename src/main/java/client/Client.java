@@ -16,7 +16,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class Client extends UnicastRemoteObject implements RemotePropertyChangeListener
+public class Client extends UnicastRemoteObject
+    implements RemotePropertyChangeListener
 {
   private String username;
   private final Connector connector;
@@ -29,20 +30,16 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     this.connector.addRemotePropertyChangeListener(this);
   }
 
-  public void createAccount(String email, String username, String password) throws RemoteException
+  public void createAccount(String email, String username, String password)
+      throws RemoteException
   {
     try
     {
-      this.connector.requestWrite();
       this.username = connector.createAccount(email, username, password);
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException(e);
-    }
-    finally
-    {
-      this.connector.requestWrite();
     }
   }
 
@@ -50,17 +47,12 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
   {
     try
     {
-      this.connector.requestRead();
       this.username = connector.login(username, password);
       return username;
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException(e);
-    }
-    finally
-    {
-      this.connector.releaseRead();
     }
   }
 
@@ -69,37 +61,30 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     return username;
   }
 
-  public void addRecipe(String title, String description, ArrayList<Ingredient> ingredients) throws RemoteException
+  public void addRecipe(String title, String description,
+      ArrayList<Ingredient> ingredients) throws RemoteException
   {
     try
     {
-      this.connector.requestWrite();
       this.connector.addRecipe(title, description, ingredients, username);
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException(e);
     }
-    finally
-    {
-      this.connector.releaseWrite();
-    }
   }
 
-  public void editRecipe(Recipe recipe, String title, String description, ArrayList<Ingredient> ingredients) throws RemoteException
+  public void editRecipe(Recipe recipe, String title, String description,
+      ArrayList<Ingredient> ingredients) throws RemoteException
   {
     try
     {
-      this.connector.requestWrite();
-      this.connector.editRecipe(recipe, title, description, ingredients, username);
+      this.connector.editRecipe(recipe, title, description, ingredients,
+          username);
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException(e);
-    }
-    finally
-    {
-      this.connector.releaseWrite();
     }
   }
 
@@ -107,16 +92,11 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
   {
     try
     {
-      this.connector.requestWrite();
       this.connector.removeRecipe(recipe, username);
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException(e);
-    }
-    finally
-    {
-      this.connector.releaseWrite();
     }
   }
 
@@ -124,16 +104,11 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
   {
     try
     {
-      this.connector.requestWrite();
       this.connector.addToFavourites(recipe, username);
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException(e);
-    }
-    finally
-    {
-      this.connector.releaseWrite();
     }
   }
 
@@ -141,33 +116,24 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
   {
     try
     {
-      this.connector.requestWrite();
       this.connector.removeFromFavourites(recipe, username);
     }
     catch (Exception e)
     {
       throw new IllegalArgumentException(e);
     }
-    finally
-    {
-      this.connector.releaseWrite();
-    }
   }
 
-  public void editPassword(String username, String password) throws RemoteException
+  public void editPassword(String username, String password)
+      throws RemoteException
   {
     try
     {
-      this.connector.requestWrite();
       this.connector.editPassword(username, password);
     }
     catch (RemoteException e)
     {
       throw new RuntimeException(e);
-    }
-    finally
-    {
-      this.connector.releaseWrite();
     }
   }
 
@@ -175,16 +141,11 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
   {
     try
     {
-      this.connector.requestWrite();
       this.connector.editEmail(username, email);
     }
     catch (RemoteException e)
     {
       throw new RuntimeException(e);
-    }
-    finally
-    {
-      this.connector.releaseWrite();
     }
   }
 
@@ -192,117 +153,48 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
   {
     try
     {
-      this.connector.requestWrite();
       this.connector.deleteProfile(username);
     }
     catch (RemoteException e)
     {
       throw new RuntimeException(e);
     }
-    finally
-    {
-      this.connector.releaseWrite();
-    }
   }
 
   public ArrayList<Recipe> getAllRecipes() throws RemoteException
   {
-    try
-    {
-      this.connector.requestRead();
-      return this.connector.getAllRecipes();
-    }
-    catch (RemoteException e)
-    {
-      throw new RuntimeException(e);
-    }
-    finally
-    {
-      this.connector.releaseRead();
-    }
+    return this.connector.getAllRecipes();
   }
 
   public ArrayList<Recipe> getRecipesByUsername() throws RemoteException
   {
-    try
-    {
-      this.connector.requestRead();
-      return this.connector.getRecipesByUsername(username);
-    }
-    catch (RemoteException e)
-    {
-      throw new RuntimeException(e);
-    }
-    finally
-    {
-      this.connector.releaseRead();
-    }
+    return this.connector.getRecipesByUsername(username);
   }
 
   public ArrayList<Recipe> getFavouriteRecipes() throws RemoteException
   {
-    try
-    {
-      this.connector.requestRead();
-      return this.connector.getFavouriteRecipes(username);
-    }
-    catch (RemoteException e)
-    {
-      throw new RuntimeException(e);
-    }
-    finally
-    {
-      this.connector.releaseRead();
-    }
+    return this.connector.getFavouriteRecipes(username);
   }
 
   public ArrayList<Person> getAllMembers() throws RemoteException
   {
-    try
-    {
-      this.connector.requestRead();
-      return this.connector.getAllMembers();
-    }
-    catch (RemoteException e)
-    {
-      throw new RuntimeException(e);
-    }
-    finally
-    {
-      this.connector.releaseRead();
-    }
+    return this.connector.getAllMembers();
   }
 
   public ArrayList<Ingredient> getAllIngredients() throws RemoteException
   {
-    try
-    {
-      this.connector.requestRead();
-      return this.connector.getAllIngredients();
-    }
-    catch (RemoteException e)
-    {
-      throw new RuntimeException(e);
-    }
-    finally
-    {
-      this.connector.releaseRead();
-    }
+    return this.connector.getAllIngredients();
   }
 
-  public void rateRecipe(int rate, Recipe recipe) throws RemoteException{
+  public void rateRecipe(int rate, Recipe recipe) throws RemoteException
+  {
     try
     {
-      this.connector.requestWrite();
-      this.connector.rateRecipe(rate,recipe, username);
+      this.connector.rateRecipe(rate, recipe, username);
     }
     catch (Exception e)
     {
       throw new RemoteException();
-    }
-    finally
-    {
-      this.connector.releaseWrite();
     }
   }
 
@@ -311,22 +203,27 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     this.support.addPropertyChangeListener(listener);
   }
 
-  @Override public void propertyChange(RemotePropertyChangeEvent event) throws RemoteException
+  @Override public void propertyChange(RemotePropertyChangeEvent event)
+      throws RemoteException
   {
     Platform.runLater(() -> {
-      if (event.getPropertyName().equals("RecipeAdded") || event.getPropertyName().equals("RecipeEdited") || event.getPropertyName().equals("RecipeRemoved"))
+      if (event.getPropertyName().equals("RecipeAdded") || event.getPropertyName().equals("RecipeEdited") || event.getPropertyName().equals("RecipeRemoved") || event.getPropertyName().equals("RatingAdded"))
         this.support.firePropertyChange("ResetRecipes", false, true);
-      else if (event.getPropertyName().equals("AddedToFavourites") || event.getPropertyName().equals("RemovedFromFavourites"))
+      else if (event.getPropertyName().equals("AddedToFavourites") || event.getPropertyName().equals("RemovedFromFavourites") || event.getPropertyName().equals("RatingAdded"))
         this.support.firePropertyChange("ResetFavourites", false, true);
       else if (event.getPropertyName().equals("IngredientAdded"))
-        this.support.firePropertyChange("ResetIngredients", null, event.getNewValue());
+        this.support.firePropertyChange("ResetIngredients", null,
+            event.getNewValue());
       else if (event.getPropertyName().equals("AccountCreated"))
-        this.support.firePropertyChange("AccountCreated", null, event.getNewValue());
+        this.support.firePropertyChange("AccountCreated", null,
+            event.getNewValue());
       else if (event.getPropertyName().equals("AccountRemoved"))
       {
         if (event.getNewValue().equals(username))
-          this.support.firePropertyChange("YourAccountRemoved", null, event.getNewValue());
-        this.support.firePropertyChange("AccountRemoved",null, event.getNewValue());
+          this.support.firePropertyChange("YourAccountRemoved", null,
+              event.getNewValue());
+        this.support.firePropertyChange("AccountRemoved", null,
+            event.getNewValue());
       }
     });
   }

@@ -11,10 +11,6 @@ import java.util.ArrayList;
 
 public interface Connector extends Remote
 {
-  void requestRead() throws RemoteException;
-  void releaseRead() throws RemoteException;
-  void requestWrite() throws RemoteException;
-  void releaseWrite() throws RemoteException;
   String createAccount(String email, String username, String password) throws RemoteException;
   String login(String username, String password) throws RemoteException;
   void addRecipe(String title, String description, ArrayList<Ingredient> ingredients, String username) throws RemoteException;
