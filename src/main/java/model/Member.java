@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Member extends Person implements Serializable
 {
-  private static final long SerialVersionUID = 1503;
+  private static final long SerialVersionUID = 6529685098267757692L;
 
   public Member(String email, String username, String password)
   {
