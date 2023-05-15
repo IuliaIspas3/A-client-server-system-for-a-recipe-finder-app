@@ -16,7 +16,7 @@ public class MyApplication extends Application
 {
   @Override public void start(Stage primaryStage) throws RemoteException, NotBoundException
   {
-    Registry registry = LocateRegistry.getRegistry("10.154.204.58",1099);
+    Registry registry = LocateRegistry.getRegistry("10.154.204.89",1099);
     Connector connector = (Connector) registry.lookup("rmiServer");
     Model model = new ModelManager(connector);
     ViewModelFactory viewModelFactory = new ViewModelFactory(model);

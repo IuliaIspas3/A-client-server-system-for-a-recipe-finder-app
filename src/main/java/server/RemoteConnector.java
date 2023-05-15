@@ -18,10 +18,9 @@ public class RemoteConnector implements Connector
   private PersonDAO personDAO;
   private RecipeDAO recipeDAO;
   private IngredientDAO ingredientDAO;
-  private static RemoteConnector instance;
   private final RemotePropertyChangeSupport support;
 
-  private RemoteConnector()
+  public RemoteConnector()
   {
     try
     {
@@ -34,15 +33,6 @@ public class RemoteConnector implements Connector
       throw new RuntimeException(e);
     }
     this.support = new RemotePropertyChangeSupport();
-  }
-
-  public static synchronized RemoteConnector getInstance()
-  {
-    if (instance == null)
-    {
-      instance = new RemoteConnector();
-    }
-    return instance;
   }
 
   @Override public synchronized String createAccount(String email,

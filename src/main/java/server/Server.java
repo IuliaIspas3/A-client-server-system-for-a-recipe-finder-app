@@ -12,7 +12,7 @@ public class Server
   public static void main(String[] args) throws RemoteException, AlreadyBoundException
   {
     Registry registry = LocateRegistry.createRegistry(1099);
-    RemoteConnector remoteConnector = RemoteConnector.getInstance();
+    RemoteConnector remoteConnector = new RemoteConnector();
     Remote remote = UnicastRemoteObject.exportObject(remoteConnector, 0);
     registry.bind("rmiServer", remote);
     System.out.println("Server running");

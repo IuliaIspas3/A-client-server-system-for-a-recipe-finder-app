@@ -1,6 +1,7 @@
 package model;
 
 import client.Client;
+import client.ClientInterface;
 import javafx.application.Platform;
 import model.validation.EmailValidator;
 import model.validation.PasswordValidator;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 
 public class ModelManager implements Model, PropertyChangeListener
 {
-  private final Client client;
+  private final ClientInterface client;
   private ArrayList<Recipe> recipes;
   private ArrayList<Recipe> personRecipes;
   private ArrayList<Recipe> favouriteRecipes;

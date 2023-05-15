@@ -3,11 +3,9 @@ package client;
 import dk.via.remote.observer.RemotePropertyChangeEvent;
 import dk.via.remote.observer.RemotePropertyChangeListener;
 import javafx.application.Platform;
-import model.Administrator;
 import model.Ingredient;
 import model.Person;
 import model.Recipe;
-import server.RemoteConnector;
 import shared.Connector;
 
 import java.beans.PropertyChangeListener;
@@ -16,8 +14,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class Client extends UnicastRemoteObject
-    implements RemotePropertyChangeListener
+public class Client extends UnicastRemoteObject implements RemotePropertyChangeListener, ClientInterface
 {
   private String username;
   private final Connector connector;
@@ -30,7 +27,8 @@ public class Client extends UnicastRemoteObject
     this.connector.addRemotePropertyChangeListener(this);
   }
 
-  public void createAccount(String email, String username, String password)
+  @Override public void createAccount(String email, String username,
+      String password)
       throws RemoteException
   {
     try
@@ -43,7 +41,7 @@ public class Client extends UnicastRemoteObject
     }
   }
 
-  public String login(String username, String password) throws RemoteException
+  @Override public String login(String username, String password) throws RemoteException
   {
     try
     {
@@ -56,12 +54,12 @@ public class Client extends UnicastRemoteObject
     }
   }
 
-  public String getUsername() throws RemoteException
+  @Override public String getUsername() throws RemoteException
   {
     return username;
   }
 
-  public void addRecipe(String title, String description,
+  @Override public void addRecipe(String title, String description,
       ArrayList<Ingredient> ingredients) throws RemoteException
   {
     try
@@ -74,8 +72,8 @@ public class Client extends UnicastRemoteObject
     }
   }
 
-  public void editRecipe(Recipe recipe, String title, String description,
-      ArrayList<Ingredient> ingredients) throws RemoteException
+  @Override public void editRecipe(Recipe recipe, String title,
+      String description, ArrayList<Ingredient> ingredients) throws RemoteException
   {
     try
     {
@@ -88,7 +86,7 @@ public class Client extends UnicastRemoteObject
     }
   }
 
-  public void removeRecipe(Recipe recipe) throws RemoteException
+  @Override public void removeRecipe(Recipe recipe) throws RemoteException
   {
     try
     {
@@ -100,7 +98,7 @@ public class Client extends UnicastRemoteObject
     }
   }
 
-  public void addToFavourites(Recipe recipe) throws RemoteException
+  @Override public void addToFavourites(Recipe recipe) throws RemoteException
   {
     try
     {
@@ -112,7 +110,7 @@ public class Client extends UnicastRemoteObject
     }
   }
 
-  public void removeFromFavourites(Recipe recipe) throws RemoteException
+  @Override public void removeFromFavourites(Recipe recipe) throws RemoteException
   {
     try
     {
@@ -124,7 +122,7 @@ public class Client extends UnicastRemoteObject
     }
   }
 
-  public void editPassword(String username, String password)
+  @Override public void editPassword(String username, String password)
       throws RemoteException
   {
     try
@@ -137,7 +135,7 @@ public class Client extends UnicastRemoteObject
     }
   }
 
-  public void editEmail(String username, String email) throws RemoteException
+  @Override public void editEmail(String username, String email) throws RemoteException
   {
     try
     {
@@ -149,7 +147,7 @@ public class Client extends UnicastRemoteObject
     }
   }
 
-  public void deleteProfile(String username) throws RemoteException
+  @Override public void deleteProfile(String username) throws RemoteException
   {
     try
     {
@@ -161,32 +159,32 @@ public class Client extends UnicastRemoteObject
     }
   }
 
-  public ArrayList<Recipe> getAllRecipes() throws RemoteException
+  @Override public ArrayList<Recipe> getAllRecipes() throws RemoteException
   {
     return this.connector.getAllRecipes();
   }
 
-  public ArrayList<Recipe> getRecipesByUsername() throws RemoteException
+  @Override public ArrayList<Recipe> getRecipesByUsername() throws RemoteException
   {
     return this.connector.getRecipesByUsername(username);
   }
 
-  public ArrayList<Recipe> getFavouriteRecipes() throws RemoteException
+  @Override public ArrayList<Recipe> getFavouriteRecipes() throws RemoteException
   {
     return this.connector.getFavouriteRecipes(username);
   }
 
-  public ArrayList<Person> getAllMembers() throws RemoteException
+  @Override public ArrayList<Person> getAllMembers() throws RemoteException
   {
     return this.connector.getAllMembers();
   }
 
-  public ArrayList<Ingredient> getAllIngredients() throws RemoteException
+  @Override public ArrayList<Ingredient> getAllIngredients() throws RemoteException
   {
     return this.connector.getAllIngredients();
   }
 
-  public void rateRecipe(int rate, Recipe recipe) throws RemoteException
+  @Override public void rateRecipe(int rate, Recipe recipe) throws RemoteException
   {
     try
     {
@@ -198,7 +196,8 @@ public class Client extends UnicastRemoteObject
     }
   }
 
-  public void addPropertyChangeListener(PropertyChangeListener listener)
+  @Override public void addPropertyChangeListener(
+      PropertyChangeListener listener)
   {
     this.support.addPropertyChangeListener(listener);
   }
